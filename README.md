@@ -135,6 +135,7 @@ The YOLOv8 model successfully detected vehicles and lane boundaries in real-worl
 
 ## Files and Directory Structure 📂
 
+```
 IntelliDrive/
 |-- weights/
 |   |-- yolov8n.pt               # Pretrained YOLOv8 model weights
@@ -145,15 +146,16 @@ IntelliDrive/
 |-- lane_vehicle_detection.py    # Main script for detection
 |-- README.md                    # Project documentation
 |-- requirements.txt             # Dependencies for the project
-
+```
 ---
 
 ## How to Use 🛠️
 
 ### 1. **Clone the Repository**
 ```
-git clone https://github.com/yourusername/IntelliDrive.git
-cd IntelliDrive
+git clone https://github.com/ahtisham73/IntelliDrive-Lane-and-Vehicle-Detection.git
+cd IntelliDrive-Lane-and-Vehicle-Detection
+
 ```
 ### 2. **Install Dependencies**
 ```
