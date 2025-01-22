@@ -124,12 +124,14 @@ The YOLOv8 model successfully detected vehicles and lane boundaries in real-worl
 - **Lane Detection**: Accurate identification of lane boundaries. 📊
 - **Real-Time Processing**: Achieved target frame rate of 30 FPS. 🕒
 
-### Screenshots and Demo Video
+### Rsults Demo 
 
-![Lane Detection Example](placeholder-for-image-1)
-![Vehicle Detection Example](placeholder-for-image-2)
-
-[Watch Demo Video](placeholder-for-video-link) 🎥
+#### Vehicle Detection Example
+![Vehicle Detection Example](Lane_Detection-main/Results/R1.png)
+#### Vehicle and Lane Detection Example 1
+![Vehicle and Lane Detection Example 1](Lane_Detection-main/Results/R2.png)
+#### Vehicle and Lane Detection Example 2
+![Vehicle and Lane Detection Example 2](Lane_Detection-main/Results/R3.png)
 
 ---
 
@@ -168,13 +170,13 @@ python video.py
 This will process the test videos inside the video/ folder.
 
 ---
-License 📜
+
+## License 📜
 This project is licensed under the MIT License - see the LICENSE file for details. 📜
 
----
 
-Acknowledgements 🙌
-Ultralytics YOLOv8 🙌
-OpenCV 🔍
+## Acknowledgements 🙌
+- Ultralytics YOLOv8 🙌
+- OpenCV 🔍
 
 ---
