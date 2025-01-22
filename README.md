@@ -1,4 +1,4 @@
-# IntelliDrive: Advanced Lane and Vehicle Detection 🏎️
+# IntelliDrive: Lane and Vehicle Detection 🏎️
 
 ![YOLOv8](https://img.shields.io/badge/YOLOv8-ObjectDetection-blue?style=flat-square)
 ![Python](https://img.shields.io/badge/Python-3.8%2B-green?style=flat-square)
@@ -7,7 +7,7 @@
 ---
 
 ## Introduction 🌟
-This project, **IntelliDrive**, implements advanced lane and vehicle detection using the state-of-the-art YOLOv8 (You Only Look Once, version 8) model. The primary goal is to identify vehicles and lane boundaries in video data, which is essential for autonomous driving applications. The YOLOv8 model, with its pretrained weights, enables high accuracy and computational efficiency, making it suitable for real-time perception tasks.
+This project, **IntelliDrive**, implements advanced lane and vehicle detection using the state-of-the-art YOLOv8 (You Only Look Once, version 8) model. The primary goal is to identify vehicles and lane boundaries in video data, essential for autonomous driving applications. The YOLOv8 model, with its pretrained weights, enables high accuracy and computational efficiency, making it suitable for real-time perception tasks.
 
 ---
 
@@ -17,7 +17,7 @@ This project, **IntelliDrive**, implements advanced lane and vehicle detection u
 - **Lane Detection**: Pipeline to identify and visualize lane boundaries using edge detection and line fitting. 🛣️
 - **Distance Estimation**: Approximate distances of vehicles from the camera using bounding box dimensions. 📏
 - **Real-Time Processing**: Handles video data at a target frame rate of 30 FPS. 🕒
-- **Autonomous Driving Applications**: Supports perception systems for lane-keeping and collision avoidance. 🏎️
+- **Autonomous Driving Applications**: Supports lane-keeping and collision avoidance perception systems. 🏎️
 
 ---
 
@@ -26,7 +26,7 @@ This project, **IntelliDrive**, implements advanced lane and vehicle detection u
 ### 1. **Lane Detection** 🛣️
 - **Edge Detection**: Applied Canny edge detection to identify edges in the video frame. ✂️
 - **Region of Interest (ROI)**: Masked the area of interest to focus on lanes. 🎯
-- **Line Fitting**: Used Hough Line Transformation and polynomial fitting to detect left and right lane boundaries. 📊
+- **Line Fitting**: Hough Line Transformation and polynomial fitting were used to detect left and right lane boundaries. 📊
 - **Visualization**: Created a filled polygon between lane lines for better visualization. 🖌️
 
 ### 2. **Vehicle Detection** 🏎️
@@ -46,7 +46,7 @@ This project, **IntelliDrive**, implements advanced lane and vehicle detection u
 
 ## Results 📈
 
-The YOLOv8 model successfully detected vehicles and lane boundaries in real-world video data. The system maintained high accuracy and processing speed, even in dynamic environments. Below are key results:
+The YOLOv8 model successfully detected vehicles and lane boundaries in real-world video data. The system maintained high accuracy and processing speed, even in dynamic environments. Below are the key results:
 
 - **Vehicle Detection Accuracy**: High precision for vehicle classification. 🎯
 - **Lane Detection**: Accurate identification of lane boundaries. 📊
