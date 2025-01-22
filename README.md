@@ -30,16 +30,87 @@ This project, **IntelliDrive**, implements advanced lane and vehicle detection u
 - **Line Fitting**: Hough Line Transformation and polynomial fitting were used to detect left and right lane boundaries. 📊
 - **Visualization**: Created a filled polygon between lane lines for better visualization. 🖌️
 
+#### Step 1: Masking the Region of Interest (ROI)
+Only the lower part of the image (where lanes are typically visible) is processed.  
+```python
+def region_of_interest(img, vertices):
+    mask = np.zeros_like(img)
+    match_mask_color = 255
+    cv2.fillPoly(mask, vertices, match_mask_color)
+    masked_image = cv2.bitwise_and(img, mask)
+    return masked_image
+```
+#### Step 2: Edge Detection using Canny
+We convert the image to grayscale and apply Canny Edge Detection to highlight the edges.
+```python
+gray_image = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
+cannyed_image = cv2.Canny(gray_image, 100, 200)
+```
+#### Step 3: Hough Line Transformation
+This technique detects line segments representing the lanes.
+```python
+lines = cv2.HoughLinesP(
+    cropped_image,
+    rho=6,
+    theta=np.pi / 60,
+    threshold=160,
+    lines=np.array([]),
+    minLineLength=40,
+    maxLineGap=25
+)
+```
+
 ### 2. **Vehicle Detection** 🏎️
 - **YOLOv8 Model**: Leveraged pretrained YOLOv8 weights to detect vehicles. 🧑‍💻
 - **Bounding Boxes**: Drew bounding boxes around detected vehicles. 🔲
 - **Classification**: Focused on detecting cars with confidence scores ≥ 0.5. ✅
 
+#### Step 1: Load the YOLOv8 Model
+We use a pre-trained YOLOv8 model to detect cars in each frame.
+```python
+from ultralytics import YOLO
+model = YOLO('weights/yolov8n.pt')
+```
+#### Step 2: Draw Bounding Boxes
+For each detected car, we draw bounding boxes and display the class name (car) with a confidence score.
+```python
+for box in boxes:
+    x1, y1, x2, y2 = map(int, box.xyxy[0])
+    conf = box.conf[0]
+    if model.names[cls] == 'car' and conf >= 0.5:
+        label = f'{model.names[cls]} {conf:.2f}'
+        cv2.rectangle(lane_frame, (x1, y1), (x2, y2), (0, 255, 255), 2)
+        cv2.putText(lane_frame, label, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 255), 2)
+```
+
 ### 3. **Distance Estimation** 📏
 - **Bounding Box Dimensions**: Used box size to estimate vehicle distance. 📐
 - **Basic Calculation**: Assumed focal length and known dimensions for approximate distance calculation. 🔢
 
-### 4. **Integration** 🌐
+```python
+def estimate_distance(bbox_width, bbox_height):
+    focal_length = 1000  # Example focal length
+    known_width = 2.0  # Approximate width of a car (in meters)
+    distance = (known_width * focal_length) / bbox_width
+    return distance
+```
+
+### 4. Video Processing Pipeline
+We combine lane detection, car detection, and distance estimation into a real-time video processing pipeline.
+```python
+while cap.isOpened():
+    ret, frame = cap.read()
+    if not ret:
+        break
+    lane_frame = pipeline(resized_frame)
+    results = model(resized_frame)
+    for result in results:
+        # Draw bounding boxes and estimate distance
+    cv2.imshow('Lane and Car Detection', lane_frame)
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+```
+### 5. **Integration** 🌐
 - Combined lane detection and vehicle detection outputs for simultaneous visualization in real time. ⚡
 - Enabled autonomous driving features like lane-keeping and collision avoidance. 🏎️
 
@@ -64,68 +135,44 @@ The YOLOv8 model successfully detected vehicles and lane boundaries in real-worl
 
 ## Files and Directory Structure 📂
 
-```
 IntelliDrive/
 |-- weights/
 |   |-- yolov8n.pt               # Pretrained YOLOv8 model weights
 |-- video/
-|   |-- video.mp4                # Input video file for detection
+|   |-- car.mp4                  # Test video for detection
+|   |-- V2.mp4                   # Another test video
+|   |-- challenge_video.mp4      # Test video for lane and vehicle detection
 |-- lane_vehicle_detection.py    # Main script for detection
 |-- README.md                    # Project documentation
-```
+|-- requirements.txt             # Dependencies for the project
 
 ---
 
 ## How to Use 🛠️
 
 ### 1. **Clone the Repository**
-```bash
+```
 git clone https://github.com/yourusername/IntelliDrive.git
 cd IntelliDrive
 ```
-
 ### 2. **Install Dependencies**
-```bash
+```
 pip install -r requirements.txt
 ```
-
-### 3. **Download Pretrained Weights**
-Place the `yolov8n.pt` weights file in the `weights/` directory. You can download the weights from the [Ultralytics YOLOv8 Repository](https://github.com/ultralytics/ultralytics). 🔗
-
-### 4. **Run the Detection**
-```bash
-python lane_vehicle_detection.py
+### 3. **Run the Detection**
 ```
+python video.py
+```
+This will process the test videos inside the video/ folder.
 
-### 5. **Output**
-- Detected lane and vehicle visualizations will be displayed in a window. 📺
-- Press `q` to exit the visualization. ❌
+---
+License 📜
+This project is licensed under the MIT License - see the LICENSE file for details. 📜
 
 ---
 
-## Conclusion 🏁
-The pretrained YOLOv8 model effectively detected vehicles and lanes, demonstrating its reliability for real-time autonomous driving perception systems. The pipeline is efficient and adaptable, serving as a foundation for more advanced autonomous vehicle applications. Future improvements could include:
-
-- Integration with planning and control algorithms. 🤖
-- Camera calibration for improved distance estimation. 📐
-- Enhanced robustness for challenging weather conditions. 🌧️
-
----
-
-## Future Work 🚀
-- Support for additional object categories. 🏷️
-- Multi-camera support for improved perception. 📷
-- Optimized pipeline for edge devices like Raspberry Pi or NVIDIA Jetson. 💻
-
----
-
-## License 📜
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details. 📜
-
----
-
-## Acknowledgements 🙌
-- [Ultralytics YOLOv8](https://github.com/ultralytics/ultralytics) 🙌
-- [OpenCV](https://opencv.org/) 🔍
+Acknowledgements 🙌
+Ultralytics YOLOv8 🙌
+OpenCV 🔍
 
 ---
