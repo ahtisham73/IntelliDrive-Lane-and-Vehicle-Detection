@@ -2,6 +2,7 @@
 
 ![YOLOv8](https://img.shields.io/badge/YOLOv8-ObjectDetection-blue?style=flat-square)
 ![Python](https://img.shields.io/badge/Python-3.8%2B-green?style=flat-square)
+![OpenCV](https://img.shields.io/badge/OpenCV-4.5%2B-blue?style=flat-square)
 ![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)
 
 ---
