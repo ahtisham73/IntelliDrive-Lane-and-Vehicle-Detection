@@ -1,4 +1,4 @@
-# IntelliDrive: Lane and Vehicle Detection 🏎️
+# 🏎️IntelliDrive: Lane and Vehicle Detection 
 
 ![YOLOv8](https://img.shields.io/badge/YOLOv8-ObjectDetection-blue?style=flat-square)
 ![Python](https://img.shields.io/badge/Python-3.8%2B-green?style=flat-square)
