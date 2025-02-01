@@ -178,5 +178,14 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## Acknowledgements 🙌
 - Ultralytics YOLOv8 🙌
 - OpenCV 🔍
+  
+---
+
+🚀 Contributions are welcome! 
+Submit a PR or open an issue to collaborate. Let’s build smarter
 
 ---
+## 📨 Contact
+
+You can reach me via email at [ahtishamsudheer@gmail.com](mailto:ahtishamsudheer@gmail.com).
+
